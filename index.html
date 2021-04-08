@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <link rel="stylesheet" href="./dist/index.css">
+    <script src="../布局作业/rem.js"></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/zepto.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/event.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/touch.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/ajax.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/callbacks.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/deferred.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/fx.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/fx_methods.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/data.js'></script>
+    <script src='../node_modules/_zepto@1.2.0@zepto/src/detect.js'></script>
+</head>
+<body>
+    <section class="top">
+        <h1>新品上市</h1>
+        <span class="iconfont icon-icon span1"></span>
+        <ul class="list">
+            
+        </ul>
+    </section>
+    <section class="content">
+        <!-- <div class="c_list">
+            <li class="c_item">
+                <img class="imgSrc" src="./images/1.png" alt="">
+                <p>jshdhj</p>
+                <div><span>￥134</span><span>￥179</span></div>
+            </li>
+            <li class="c_item">
+                <img class="imgSrc" src="./images/1.png" alt="">
+                <p>jshdhj</p>
+                <div><span>￥134</span><span>￥179</span></div>
+            </li>
+            <li class="c_item">
+                <img class="imgSrc" src="./images/1.png" alt="">
+                <p>jshdhj</p>
+                <div><span>￥134</span><span>￥179</span></div>
+            </li>
+            <li class="c_item">
+                <img class="imgSrc" src="./images/1.png" alt="">
+                <p>jshdhj</p>
+                <div><span>￥134</span><span>￥179</span></div>
+            </li>
+        </div> -->
+    </section>
+    <section class="bottom">
+        <ul class="b_list">
+            <li class="b_item">
+                <span class="iconfont icon-home span1"></span>
+                <span>首页</span>
+            </li>
+            <li class="b_item">
+                <span class="iconfont icon-fenlei span1"></span>
+                <span>分类</span>
+            </li>
+            <li class="b_item">
+                <span class="iconfont icon-gouwuche span1"></span>
+                <span>购物车</span>
+            </li>
+            <li class="b_item">
+                <span class="iconfont icon-home-copy span1"></span>
+                <span>我的秀</span>
+            </li>
+            <li class="b_item">
+                <span class="iconfont icon-gengduo span1"></span>
+                <span>更多</span>
+            </li>
+        </ul>
+    </section>
+
+    <script src="../day5/gesture.js"></script>
+    <script>
+        var content = document.querySelector(".content")
+        var c_list = document.querySelectorAll(".c_list")
+        $.ajax({
+            url:"./json/nav.json",
+            type:"get",
+            success:function(data){
+                for(var i=0;i<data.length;i++){
+                    $('.list').append("<li class='t_item'></li>")
+                    $(".t_item").eq(i).addClass('iconfont '+data[i].classname).attr('data-id',data[i].classID)
+                    $(".t_item").eq(0).addClass('active')
+                }
+                    // $('.t_item').on('tap',function(){
+                    //     for(var i=0;i<$('.t_item').length;i++){
+                    //         $('.t_item').eq(i).removeClass('active')
+                    //     }
+                    //     $(this).addClass('active')
+
+                    // })
+            }
+        })
+        $.ajax({
+            url:"./json/product.json",
+            type:"get",
+            success:function(data){
+                for(var i=0;i<data.length;i++){
+                    $('.content').append(`<div class="c_list" data-id=${data[i].classID}></div>`)
+                    for(var j=0;j<data[i].productList.length;j++){
+                        $(".c_list").eq(i).append(`<li class="c_item">
+                <img class="imgSrc" src="${data[i].productList[j].imgSrc}" alt="">
+                <p>${data[i].productList[j].pname}</p>
+                <div><span>￥${data[i].productList[j].nowPrice}</span><span>￥${data[i].productList[j].oldPrice}</span></div>
+            </li>`).hide()
+                         $(".c_list").eq(0).show()
+                         
+                    }
+                }
+            }
+        })
+        var c_list_h=0
+        $(document).on('tap','.t_item',function(){
+            for(var i=0;i<$('.t_item').length;i++){
+                $('.t_item').eq(i).removeClass('active')
+                $(".c_list").eq(i).hide()
+            }
+            $(this).addClass('active')
+            $(".c_list").eq($(this).index()).show()
+        })
+        var startDis = 0 
+        var startpoint =0
+        var prevPoint = 0
+        var prevTime =0
+        var lastY = 0
+        var lastTime = 0
+        content.addEventListener('touchstart',function(e){
+            console.log(1)
+            startpoint = e.changedTouches[0].pageY
+            startDis = css(content,'translateY');
+            prevPoint =startpoint
+            prevTime = new Date().getTime();
+            console.log(maxDis)
+        
+        })
+        content.addEventListener('touchmove',function(e){
+            var nowPoint = e.changedTouches[0].pageY
+            var dis = nowPoint - startpoint
+            css(content,'translateY',dis+startDis)
+        })
+        content.addEventListener('touchend',function(e){
+
+        })
+       
+        
+    </script>
+</body>
+</html>

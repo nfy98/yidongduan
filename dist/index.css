@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100vw;
+  height: 11.5rem;
+  touch-action: none;
+  position: relative;
+  overflow: hidden;
+}
+ul {
+  list-style: none;
+}
+.top {
+  width: 100vw;
+  height: 2rem;
+  position: relative;
+  z-index: 10;
+}
+.top h1 {
+  height: 1.2rem;
+  font-size: 0.36rem;
+  text-align: center;
+  line-height: 1.2rem;
+  color: #fff;
+  background: #aa1a19;
+}
+.top .span1 {
+  display: block;
+  width: 1rem;
+  height: 0.6rem;
+  background: #c40c0c;
+  border-radius: 0.1rem;
+  position: absolute;
+  right: 0.4rem;
+  top: 0.3rem;
+  font-size: 0.34rem;
+  text-align: center;
+  line-height: 0.6rem;
+  color: #fff;
+}
+.top .list {
+  display: flex;
+  width: 8.3rem;
+  height: 0.8rem;
+  background: #9a9fa5;
+  justify-content: space-around;
+  align-items: center;
+}
+.top .list li {
+  font-size: 0.36rem;
+}
+.top .list li.active {
+  color: #fff;
+}
+.content {
+  width: 100vw;
+  position: absolute;
+  top: 2rem;
+  bottom: 1.3rem;
+}
+.content .c_list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.content .c_list .c_item {
+  width: 40%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+.content .c_list .c_item .imgSrc {
+  width: 100%;
+  height: 2rem;
+  box-sizing: border-box;
+  padding: 0.2rem;
+  border: 1px solid #dddddf;
+}
+.content .c_list .c_item p {
+  font-size: 0.26rem;
+  margin-top: 0.2rem;
+}
+.content .c_list .c_item div {
+  width: 100%;
+  font-size: 0.26rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.1rem;
+}
+.content .c_list.active {
+  display: flex;
+}
+.bottom {
+  width: 100vw;
+  height: 1.3rem;
+  background: #484850;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+}
+.bottom .b_list {
+  width: 100vw;
+  height: 1.3rem;
+  display: flex;
+  justify-content: space-around;
+}
+.bottom .b_list .b_item {
+  height: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.3rem;
+}
+.bottom .b_list .b_item .span1 {
+  font-size: 0.5rem;
+}
